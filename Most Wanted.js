@@ -26,3 +26,5 @@
 // search data base of people and display info about them
 //Functionality first
 
+console.log("Hello Test");
+
