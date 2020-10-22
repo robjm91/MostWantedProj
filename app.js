@@ -7,18 +7,35 @@ Build all of your functions for displaying and gathering information below (GUI)
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
+  let searchTrait;
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchTrait = searchByTrait(trait);
       break;
       default:
     app(people); // restart app
       break;
   }
-  
+
+//the 'no' case TODO, intended to search by trait rather than name.
+
+function searchByTrait(dog) {
+  let trait = "dog";
+  let eyeColor = ["brown", "hazel", "black", "green"];
+  // if(browneyes === "brown") {
+    
+    //   console.log("It is brown.");
+    // }
+    // else if(hazeleyes === "hazel"){
+      //   console.log("They are not hazel.");
+    }
+    console.log(searchByTrait);
+    
+
+
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
