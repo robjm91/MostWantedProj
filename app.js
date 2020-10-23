@@ -4,36 +4,55 @@ Build all of your functions for displaying and gathering information below (GUI)
 */
 
 // app is the function called to start the entire application
+
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
-  let searchTrait;
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchTrait = searchByTrait(trait);
+      searchResults = searchById(people);
+      break;
+    case 'no':
+      searchResults = searchByGender(people);
+      break;
+    case 'no':
+      searchResults = searchByDOB(people);
       break;
       default:
     app(people); // restart app
       break;
   }
 
-//the 'no' case TODO, intended to search by trait rather than name.
+  function searchById(people){
+    let id = promptFor("Do you know the person's ID?", chars)
+    
+    let foundPerson = people.filter(function(person){
+      if(person.id === id){
+        return true;
+      }
+      else{
+        return false;
+      }
+    })
+    return foundPerson;
+  }
 
-function searchByTrait(dog) {
-  let trait = "dog";
-  let eyeColor = ["brown", "hazel", "black", "green"];
-  // if(browneyes === "brown") {
+  function searchByGender(people){
+    let gender = promptFor("Do you know the person's gender?", chars)
     
-    //   console.log("It is brown.");
-    // }
-    // else if(hazeleyes === "hazel"){
-      //   console.log("They are not hazel.");
-    }
-    console.log(searchByTrait);
-    
+    let foundPerson = people.filter(function(person){
+      if(person.gender === gender){
+        return true;
+      }
+      else{
+        return false;
+      }
+    })
+    return foundPerson;
+  }
 
 
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
