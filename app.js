@@ -1,34 +1,4 @@
-"use strict"
-/*
-WORKING COPY TO TURN IN
-Build all of your functions for displaying and gathering information below (GUI).
-*/
-​
-// app is the function called to start the entire application
-function app(people){
-  let searchType = prompt("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); //'Welcome' prompt at start of application
-  let searchResults;
-  switch(searchType){ //Switch Case 1
-    case 'yes':
-      searchResults = searchByName(people); //user types 'yes' to search by name.
-      break;
-    case 'no': 
-     let searchType = promptFor("Do you want to search by Traits? Enter 'yes' or 'no'", yesNo).toLowerCase(); 
-      switch(searchType) 
-      {
-        case 'yes': // 'yes' case if user wants to search by Traits. 
-        searchResults=searchByTraits(people);// here the searchByTraits function is called which searches through the menu of traits
-        break;
-        case 'no': 
-      }
-      default:
-    app(people); // restart app
-      break;
-  }
-​
-​
-​
-// Menu function to call once you find who you are looking for
+
 function mainMenu(person, people){
 ​
     /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
@@ -38,7 +8,7 @@ function mainMenu(person, people){
       return app(people); // restart
     }
   
-    let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+    let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
   
     switch(displayOption){
       case "info":
@@ -58,9 +28,33 @@ function mainMenu(person, people){
       default:
       return mainMenu(person, people); // ask again
     }
-  }
+}
   
-  function searchByName(people){
+function app(people){
+  let searchType = prompt("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); //'Welcome' prompt at start of application
+  let searchResults;
+  switch(searchType){ //Switch Case 1
+    case 'yes':
+      searchResults = searchByName(people); //user types 'yes' to search by name.
+      break;
+    case 'no': 
+     let searchType = promptFor("Do you want to search by Traits? Enter 'yes' or 'no'", yesNo).toLowerCase(); 
+      switch(searchType) 
+      {
+        case 'yes': // 'yes' case if user wants to search by Traits. 
+        searchResults=searchByTraits(people);// here the searchByTraits function is called which searches through the menu of traits
+        break;
+        case 'no': 
+      }
+      break;
+      default:
+    app(people); // restart app
+      break;
+  }
+}
+
+
+function searchByName(people){
     let firstName = promptFor("What is the person's first name?", chars);
     let lastName = promptFor("What is the person's last name?", chars);
   
@@ -74,7 +68,7 @@ function mainMenu(person, people){
     })
     // TODO: find the person using the name they entered
     return foundPerson;
-  }
+}
 ​
   function searchByTraits(people){
     let listOfTraits = promptFor("Do you want to search by gender, eye color, height, or weight?", chars).toLowerCase();
@@ -92,6 +86,7 @@ function mainMenu(person, people){
             listOfTraits = searchByWeight(people);
             break;            
     }
+  }
     function searchByGender(people){ 
         let gender = promptFor("What is the gender of the person?", chars).toLowerCase();
 ​
@@ -120,7 +115,7 @@ function mainMenu(person, people){
     // })
     // // TODO: find the person using the name they entered
     // return foundPerson;
-  }
+  
   
   // alerts a list of people
   function displayPeople(people){
@@ -155,4 +150,3 @@ function mainMenu(person, people){
   function chars(input){
     return true; // default validation only
   }
-}
