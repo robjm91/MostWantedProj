@@ -5,7 +5,7 @@ Build all of your functions for displaying and gathering information below (GUI)
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); //'Welcome' prompt at start of application
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); //Starting prompt at start of application
   let searchResults;
   switch(searchType){ //Switch Case 1
     case 'yes':
@@ -40,10 +40,9 @@ function app(people){
             searchResults=searchByGender(people);
             break;
             case 'no':
-            return; //as we dont have any other search criteria
+            return; //As we don't have any more criteria to ask for
             break;
             default:
-            console.log("hye");
             app(people);// restart
             break;
           }
@@ -63,7 +62,7 @@ function app(people){
         app(people); // restart app
          break;
       }
-      // TODO: search by traits
+      
       break;
       default:
     app(people); // restart app
@@ -87,29 +86,28 @@ function mainMenu(person, people){
   {
   let displayOption = prompt("Found " + person.length + " records" + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
   switch(displayOption){ 
-    case "info": // if user select info 
+    case "info": // if user selects 'info' at prompt 
     for(var i=0;i<person.length;i++)
-    displayPersonInConsole(person[i]); // just call function that print general info about user 
+    displayPersonInConsole(person[i]); // Calls the displayPersonInConsole function to show persons info 
     break;
-    // TODO: get person's family
     case "family": // in case user enters family 
     for(var i=0;i<person.length;i++)
     {
-    let familyInfo; //this variably will store family information 
-    var parents= getParentsInfo(person[i],people); //helper function This function returns the parent information names of both the parents so this function returns an array of a person by searching from people or simply data
-    if(parents.length==0) //if function returns nothing that means parenrs(array) will be empty and its length will be 0
-    familyInfo = "Parents Info Not Available: " + "\n";  // in case of zero length it means parents info is not available so we will simply store the message
-    else if(parents.length==1) //if function find just one parent that means parenrs(array) will contain only one parent name and its length will be 1
+    let familyInfo; //variable familyInfo created to store the peoples data 
+    var parents= getParentsInfo(person[i],people); //Helper function. This function returns the parent information names of both the parents so this function returns an array of a person by searching from people or simply data
+    if(parents.length==0) //if function returns nothing that means parents(array) will be empty and its length will be 0
+    familyInfo = "Parents Info Not Available: " + "\n";  // in case parent array has zero length, the info is not available, so we will simply store the message
+    else if(parents.length==1) //if function finds just one parent that means parents(array) will contain only one parent name and its length will be 1
     familyInfo = "Parents Info Available: " + parents[0] + "\n"; //that one parent info will be stored in familyInfo variable  
-    else if(parents.length==2) //if function find Both of the arents that means parenrs(array) will contain only both parents name and its length will be 2
-    familyInfo = "Parents Info Available: " + parents[0] + " And " + parents[1] +"\n"; //both parent info will be stored in familyInfo variable
-  // Family info contains both parents and spouse info now find spouse infp
-    let spouse= searchById(person[i].currentSpouse,people); // searchById(id of spouse, people data) will be called this function a person on the base of id so we can find spouse of a person by passing spouse id to this function 
-    if(spouse) // if function returns a spouse (this if condition is there as some of the person might not have a spouse)
+    else if(parents.length==2) //if function finds Both of the parents then the parents(array) will contain only both parents name and its length will be 2
+    familyInfo = "Parents Info Available: " + parents[0] + " And " + parents[1] +"\n"; //both parents info will be stored in familyInfo variable
+  // Family info contains both parents and spouse info now to find spouse info below
+    let spouse= searchById(person[i].currentSpouse,people); // searchById(id of spouse, people data) will be called to pass in the ID of the spouse to this function 
+    if(spouse) // if function returns a spouse (this is if the condition is there as some of the people might not have a spouse)
     familyInfo += "Spouse Name: " + spouse.firstName + spouse.lastName + "\n"; // append first Name and lastName of spouse in family info variable 
     else
     familyInfo += "No spouse \n"; //if no spouse info is found simply append No spouse in variable
-    console.log(familyInfo); //printing familt info
+    console.log(familyInfo); //finally prints the family info here
     }
     break;
     case "restart":
@@ -127,26 +125,26 @@ function mainMenu(person, people){
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){ 
-    case "info": // if user select info 
-    displayPerson(person); // just call function that print general info about user 
+    case "info": // if user selects info 
+    displayPerson(person); // Calls displayPerson function to display general info about person 
     break;
-    // TODO: get person's family
+    
     case "family": // in case user enters family 
-    let familyInfo; //this variably will store family information 
-    var parents= getParentsInfo(person,people); //helper function This function returns the parent information names of both the parents so this function returns an array of a person by searching from people or simply data
-    if(parents.length==0) //if function returns nothing that means parenrs(array) will be empty and its length will be 0
+    let familyInfo; //this variable will store family information 
+    var parents= getParentsInfo(person,people); //Helper function. This function returns the parent information names of both the parents so this function returns an array of a person by searching from people or simply data
+    if(parents.length==0) //if function returns nothing that means parents(array) will be empty and its length will be 0
     familyInfo = "Parents Info Not Available: " + "\n";  // in case of zero length it means parents info is not available so we will simply store the message
-    else if(parents.length==1) //if function find just one parent that means parenrs(array) will contain only one parent name and its length will be 1
-    familyInfo = "Parents Info Available: " + parents[0] + "\n"; //that one parent info will be stored in familyInfo variable  
-    else if(parents.length==2) //if function find Both of the arents that means parenrs(array) will contain only both parents name and its length will be 2
-    familyInfo = "Parents Info Available: " + parents[0] + " And " + parents[1] +"\n"; //both parent info will be stored in familyInfo variable
+    else if(parents.length==1) //if function finds just one parent that means parents(array) will contain only one parent name and its length will be 1
+    familyInfo = "Parents Info Available: " + parents[0] + "\n"; //that one parents info will be stored in familyInfo variable  
+    else if(parents.length==2) //if function finds Both of the parents that means parents(array) will contain only both parents name and its length will be 2
+    familyInfo = "Parents Info Available: " + parents[0] + " And " + parents[1] +"\n"; //both parents info will be stored in familyInfo variable
 	// Family info contains both parents and spouse info now find spouse infp
     let spouse= searchById(person.currentSpouse,people); // searchById(id of spouse, people data) will be called this function a person on the base of id so we can find spouse of a person by passing spouse id to this function 
      if(spouse) // if function returns a spouse (this if condition is there as some of the person might not have a spouse)
     familyInfo += "Spouse Name: " + spouse.firstName + spouse.lastName + "\n"; // append first Name and lastName of spouse in family info variable 
     else
     familyInfo += "No spouse \n"; //if no spouse info is found simply append No spouse in variable
-    alert(familyInfo); //printing familt info
+    alert(familyInfo); //prints family info
     
     break;
     case "descendants":
@@ -175,16 +173,16 @@ function searchByName(people){
     }
   })
   console.log(foundPerson);
-  // TODO: find the person using the name they entered
+ 
   return foundPerson;
 }
 
 function searchById1(people){ // returns an object by searching based on id
   let iD = promptFor("What is the persons ID number?", chars); // ask user to enter the id 
-  iD=parseInt(iD); // convert the id in integer as promptFor returns a string 
+  iD=parseInt(iD); // convert the id to an integer as promptFor returns a string 
   let foundPerson = people.find((person)=>person.id === iD) // find is an array search method in java script which search from the array and returns the object if it is there, here we are searching the whole data array on the base of id 
 
-  return foundPerson; //return the serch result
+  return foundPerson; //return the search result
 }
 
 function searchByTraits(people){ // returns an object by searching based on traits 
@@ -224,8 +222,8 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   //calculating age
-  var tempStr=person.dob; // getint the date of birth 
-  tempStr=tempStr.split("/"); // it will be string we'll convert that strint to array to find the age lets say date of birth is "12/01/1999" split method will convert this in to array of integer as ["12","01","1999"] means we have year of birth at second index
+  var tempStr=person.dob; // gets persons DOB as an int  
+  tempStr=tempStr.split("/"); // the DOB will be a string so here we convert that string to an array to find the age. Lets say date of birth is "12/01/1999" split method will convert this in to array of integer as ["12","01","1999"], which means we have year of birth at second index
   var age=tempStr[2]; //get year of birth  
   age = parseInt(age); //convert it into integer 
   age = 2020-age; // minus date of birth with 2020 to get the current age
@@ -234,7 +232,6 @@ function displayPerson(person){
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
-  // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
 
@@ -245,8 +242,8 @@ function displayPersonInConsole(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   //calculating age
-  var tempStr=person.dob; // getint the date of birth 
-  tempStr=tempStr.split("/"); // it will be string we'll convert that strint to array to find the age lets say date of birth is "12/01/1999" split method will convert this in to array of integer as ["12","01","1999"] means we have year of birth at second index
+  var tempStr=person.dob; // gets DOB as an INT 
+  tempStr=tempStr.split("/"); // Same as displayPerson function where converts DOB into an array to find the age.
   var age=tempStr[2]; //get year of birth  
   age = parseInt(age); //convert it into integer 
   age = 2020-age; // minus date of birth with 2020 to get the current age
@@ -300,7 +297,7 @@ function getParentsInfo(person,people) //this function returns name of parents
      parentInfo.push(parent1Name); // we will add the parent name in array  
     }
     else if(person.parents.length==2) // if length is two means we have information of only both parents against a record as parents:[1123134,1213232]
-    {//retrieve one parent inf
+    {//retrieve one parent info
      var id1= person.parents[0];
      var parent1= searchById(id1,people)
      var parent1Name= parent1.firstName + " " + parent1.lastName;
