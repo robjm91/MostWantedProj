@@ -39,10 +39,9 @@ function mainMenu(person, people) {
         }
       
         let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-      
+        let searchResults;
         switch(displayOption){
           case "info":
-          //TODO get info
           break;
           case "family":
           // TODO: get person's family
@@ -58,7 +57,7 @@ function mainMenu(person, people) {
           default:
           return mainMenu(person, people); // ask again
         }
-        alert(data);
+        
     }
       
 
@@ -67,7 +66,7 @@ function mainMenu(person, people) {
     function searchByName(people){
         let firstName = promptFor("What is the person's first name?", chars);
         let lastName = promptFor("What is the person's last name?", chars);
-      
+      let foundPerson = people.find((person)=>person.id === iD)
         let foundPerson = people.filter(function(person){
           if(person.firstName === firstName && person.lastName === lastName){
             return true;
