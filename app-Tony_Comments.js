@@ -121,7 +121,7 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
   }
-  //asking which info of persion user wants
+  //asking which info of person user wants
   else
   {
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
